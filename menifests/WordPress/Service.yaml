@@ -5,9 +5,10 @@ metadata:
   labels:
     app: wordpress
 spec:
+  type: NodePort
   selector:
-    app: wordpress
+    app: wordpress-deployment
   ports:
   - port: 80
     targetPort: 8080
-  type: NodePort
+    nodePort: 31111

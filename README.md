@@ -9,9 +9,9 @@
 - HPA [x]
 - ConfigMap
 - Secret
-- PVC
+- PVC [x]
 - Service [x]
-- Ingress
+- Ingress [x]
 
 ### Mysql APP
 

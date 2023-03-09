@@ -16,6 +16,9 @@ spec:
       containers:
       - name: wordpress
         image: wordpress:latest
+        volumeMounts:
+          - mountPath: /usr/www/html
+            name: wordpress-content
         resources:
           requests:
             cpu: 50m
@@ -35,4 +38,8 @@ spec:
           path: /
           port: 8080
         ports:
-        - containerPort: 8080
+        - containerPort: 80
+      volumes:
+      - name: wordpress-content
+        persistentVolumeClaim:
+          claimName: wordpress-pvc
