@@ -9,11 +9,16 @@ metadata:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: instance
 spec:
+  defaultBackend:
+    service:
+      name: wordpress-service
+      port:
+        number: 80
   rules:
   - http:
       paths:
       - pathType: Prefix
-        path: "/"
+        path: /
         backend:
           service:
             name: wordpress-service

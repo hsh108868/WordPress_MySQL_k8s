@@ -4,14 +4,15 @@
 
 ### wordpress APP
 
-- Deployment [x]
-- Probe, Resource [x]
-- HPA [x]
-- ConfigMap
-- Secret
-- PVC [x]
-- Service [x]
-- Ingress [x]
+- [ x ] Deployment
+- [ x ] Probe
+- [ x ] Resource
+- [ x ] HPA
+- [ x ] ConfigMap
+- [ x ] Secret
+- [ x ] PVC
+- [ x ] Service
+- [ x ] Ingress
 
 ### Mysql APP
 

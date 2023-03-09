@@ -5,4 +5,4 @@ metadata:
   labels:
     app: wordpress
 data:
-  key: value
+  host: wordpress-mysql
