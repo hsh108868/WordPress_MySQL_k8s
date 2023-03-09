@@ -16,10 +16,11 @@
 
 ### Mysql APP
 
-- StatfulSet
-- Probe, Resource
+- [x] StatefulSet
+- [x] Probe
+- [x] Resource
 - Read Replica
-- ConfigMap
-- Secret
-- PVC
-- Service
+- [x] ConfigMap
+- [x] Secret
+- [x] PVC
+- [x] Service
