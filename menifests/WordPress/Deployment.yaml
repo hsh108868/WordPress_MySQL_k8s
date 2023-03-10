@@ -21,12 +21,12 @@ spec:
             name: wordpress-content
         env:
           - name: WORDPRESS_DB_HOST
-            valueForm:
+            valueFrom:
               configMapKeyRef:
                 name: wordpress-configmap
                 key: host
           - name: WORDPRESS_DB_PASSWORD
-            valueForm:
+            valueFrom:
               secretKeyRef:
                 name: mysql-pass
                 key: password

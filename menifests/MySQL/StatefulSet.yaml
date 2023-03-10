@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: mysql-statefulset
+  name: wordpress-mysql
   labels:
     name: wordpress
 spec:
@@ -33,7 +33,7 @@ spec:
             cp /mnt/config-map/primary.cnf /mnt/conf.d/
           else
             cp /mnt/config-map/replica.cnf /mnt/conf.d/
-          fi  #0번이면 primary.cnf, 아니면 replica.cnf를 가옴
+          fi
         volumeMounts:
         - name: conf
           mountPath: /mnt/conf.d
@@ -81,7 +81,10 @@ spec:
           timeoutSeconds: 5
         readinessProbe:
           exec:
-            command: ["mysql", "-h", "127.0.0.1", "-e", "SELECT 1"]
+            command:
+              - bash
+              - "-c"
+              - mysql -h 127.0.0.1 --password=$password -e "SELECT 1"
           initialDelaySeconds: 5
           periodSeconds: 2
           timeoutSeconds: 1
@@ -90,6 +93,12 @@ spec:
         ports:
         - name: xtrabackup
           containerPort: 3307
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-pass
+                key: password
         command:
         - bash
         - "-c"
@@ -119,7 +128,7 @@ spec:
             mv change_master_to.sql.in change_master_to.sql.orig
           fi
           exec ncat --listen --keep-open --send-only --max-conns=1 3307 -c \
-            "xtrabackup --backup --slave-info --stream=xbstream --host=127.0.0.1 --user=root"
+            "xtrabackup --backup --slave-info --stream=xbstream --host=127.0.0.1 --user=root --password=$password"
         volumeMounts:
         - name: data
           mountPath: /var/lib/mysql
